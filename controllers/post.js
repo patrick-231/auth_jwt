@@ -1,8 +1,9 @@
-const Post = require('../schemas/Post')
+const Post = require('../schemas/Posts')
 
 const getAllPost = async (req, res) =>{
     try {
-        const posts = await Post.find();
+        const user_id = req.user._id;
+        const posts = await Post.find({ user_id });
         if(!posts.length) {
             return res.status(200).json({message: 'No posts found'})
         }
@@ -26,11 +27,12 @@ const createPost = async (req, res) => {
     }
     
     try {
-        const post = await Post.create({title, body});
+        const user_id = req.user._id
+        const post = await Post.create({title, body, user_id});
         res.status(200).json(post)
     } catch (error) {
         res.status(500).json({error: error.message})
     }
 };
 
-module.export = {createPost, getAllPost}
+module.exports = {createPost, getAllPost}

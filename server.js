@@ -4,6 +4,7 @@ const colors = require('colors');
 require('dotenv').config();
 const connectDB = require('./dbinit');
 const user = require('./routes/user');
+const post = require('./routes/post');
 
 
 const app = express();
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/user', user);
+app.use('/posts', post)
 
 app.listen(PORT, () => {
     console.log(`Firing from http://localhost: ${PORT}`.rainbow )

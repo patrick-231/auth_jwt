@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const User = require('../schemas/User')
 
-const requireAuth = async (req, res) => {
+const requireAuth = async (req, res, next) => {
     //not a chicken
     const { authorization} = req.headers;
     if(!authorization) {
